@@ -1,0 +1,49 @@
+---
+- name: Install vnc packages
+  apt:
+    cache_valid_time: 86400
+    name: "{{ vnc_packages }}"
+    state: present
+    update_cache: true
+
+- name: Copy the default password file
+  user:
+    append: true
+    groups: sudo
+    name: "{{ vnc_user }}"
+
+- name: create home directory of vnc user
+  file:
+    group: "{{ vnc_user }}"
+    mode: 0750
+    owner: "{{ vnc_user }}"
+    path: /home/{{ vnc_user }}/.vnc
+    state: directory
+
+- name: Install vnc password file
+  shell: echo {{ vnc_password }} | vncpasswd -f > /home/{{ vnc_user }}/.vnc/passwd
+
+- name: Set correct file permissions
+  file:
+    group: "{{ vnc_user }}"
+    mode: 0600
+    name: /home/{{ vnc_user }}/.vnc/passwd
+    owner: "{{ vnc_user }}"
+
+- name: Install vnc server script
+  template:
+    dest: /usr/local/bin/myvncserver
+    mode: 0755
+    src: vncserver.j2
+
+- name: install systemd unit files
+  template:
+    dest: /etc/systemd/system/vncserver.service
+    src: "vncserver.service.j2"
+
+- name: start vncserver
+  systemd:
+    daemon_reload: true
+    enabled: true
+    name: vncserver
+    state: started
