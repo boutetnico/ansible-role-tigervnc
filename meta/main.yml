@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  role_name: tigervnc
+  author: Nicolas Boutet
+  description: Install and configure TigerVNC.
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - buster
+        - stretch
+  galaxy_tags:
+    - tigervnc
+    - vnc
+dependencies: []

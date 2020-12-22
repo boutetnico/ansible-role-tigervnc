@@ -1,6 +1,24 @@
 ---
-vnc_packages:
-  - tigervnc-standalone-server
+tigervnc_dependencies:
+  - dbus-x11
+
+tigervnc_packages:
   - tigervnc-common
-vnc_user: vnc
-vnc_password: mypassword
+  - tigervnc-standalone-server
+
+tigervnc_user: vnc
+tigervnc_group: vnc
+tigervnc_extra_groups: []
+
+tigervnc_home_dir: /home/{{ tigervnc_user }}
+
+tigervnc_password: abcd1234
+tigervnc_password_file: /home/{{ tigervnc_user }}/.vnc/passwd
+
+tigervnc_options: "-geometry 1440x900"
+
+tigervnc_services:
+  - name: vncserver@1.service
+  # - name: vncserver@2.service
+  #   state: stopped
+  #   enabled: false
