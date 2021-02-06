@@ -47,7 +47,7 @@
   template:
     dest: /etc/systemd/system/vncserver@.service
     group: root
-    mode: 0755
+    mode: 0750
     owner: root
     src: vncserver@.service.j2
   register: _systemd
