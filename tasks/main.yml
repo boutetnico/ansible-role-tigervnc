@@ -1,11 +1,11 @@
 ---
 - name: Ensure vnc group exists
-  group:
+  ansible.builtin.group:
     name: "{{ tigervnc_group }}"
     state: present
 
 - name: Ensure vnc user exists
-  user:
+  ansible.builtin.user:
     append: "{{ true if tigervnc_extra_groups | length > 0 else false }}"
     group: "{{ tigervnc_user }}"
     groups: "{{ tigervnc_extra_groups }}"
@@ -16,14 +16,14 @@
   when: tigervnc_group != 'root'
 
 - name: Ensure packages are installed
-  apt:
+  ansible.builtin.apt:
     install_recommends: false
     name: "{{ tigervnc_dependencies + tigervnc_packages }}"
     state: present
     update_cache: true
 
 - name: Ensure .vnc directory exists in vnc user home directory
-  file:
+  ansible.builtin.file:
     group: "{{ tigervnc_group }}"
     mode: 0750
     owner: "{{ tigervnc_user }}"
@@ -31,20 +31,20 @@
     state: directory
 
 - name: Install vnc password file
-  shell: vncpasswd -f > {{ tigervnc_password_file }}
+  ansible.builtin.shell: vncpasswd -f > {{ tigervnc_password_file }}
   args:
     creates: "{{ tigervnc_password_file }}"
     stdin: "{{ tigervnc_password }}"
 
 - name: Ensure file permissions are correct
-  file:
+  ansible.builtin.file:
     group: "{{ tigervnc_group }}"
     mode: 0600
     name: "{{ tigervnc_password_file }}"
     owner: "{{ tigervnc_user }}"
 
 - name: Ensure systemd service file is installed
-  template:
+  ansible.builtin.template:
     dest: /etc/systemd/system/vncserver@.service
     group: root
     mode: 0750
@@ -53,12 +53,12 @@
   register: _systemd
 
 - name: Reload systemd daemon
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
   when: _systemd is changed
 
 - name: Ensure each TigerVNC service is in the desired state
-  service:
+  ansible.builtin.service:
     enabled: "{{ item.enabled | d(true) }}"
     name: "{{ item.name }}"
     state: "{{ item.state | d('started') }}"
