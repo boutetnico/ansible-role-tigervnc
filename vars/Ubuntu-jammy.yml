@@ -1,0 +1,4 @@
+tigervnc_packages:
+  - tigervnc-common
+  - tigervnc-standalone-server
+  - tigervnc-tools

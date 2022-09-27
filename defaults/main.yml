@@ -2,10 +2,6 @@
 tigervnc_dependencies:
   - dbus-x11
 
-tigervnc_packages:
-  - tigervnc-common
-  - tigervnc-standalone-server
-
 tigervnc_user: vnc
 tigervnc_group: vnc
 tigervnc_extra_groups: []
