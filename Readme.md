@@ -25,7 +25,6 @@ Role Variables
 | Variable               | Required | Default                 | Choices   | Comments                                       |
 |------------------------|----------|-------------------------|-----------|------------------------------------------------|
 | tigervnc_dependencies  | yes      | `[dbus-x11]`            | list      |                                                |
-| tigervnc_packages      | yes      |                         | list      | See `defaults/main.yml`.                       |
 | tigervnc_user          | yes      | `vnc`                   | string    | User running the VNC server.                   |
 | tigervnc_group         | yes      | `vnc`                   | string    | Group running the VNC server.                  |
 | tigervnc_extra_groups  | yes      | `[]`                    | list      | List of extra groups of vnc server user.       |
