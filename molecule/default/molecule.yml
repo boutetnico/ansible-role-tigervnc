@@ -3,6 +3,8 @@ dependency:
   name: galaxy
   options:
     role-file: molecule/default/requirements.yml
+  env:
+    ANSIBLE_ROLES_PATH: ../shared
 
 driver:
   name: docker
@@ -44,11 +46,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
-
-lint: |
-    yamllint .
-    ansible-lint
-    flake8
 
 provisioner:
   name: ansible

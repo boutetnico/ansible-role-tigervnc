@@ -2,5 +2,7 @@
 - name: Prepare
   hosts: all
 
-  roles:
-    - role: ansible-role-xfce
+  tasks:
+    - name: Setup xfce
+      ansible.builtin.include_role:
+        name: boutetnico.xfce

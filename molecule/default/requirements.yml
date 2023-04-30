@@ -1,2 +1,3 @@
 ---
 - src: https://github.com/boutetnico/ansible-role-xfce.git
+  name: boutetnico.xfce
