@@ -28,8 +28,8 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
-  - name: ansible-role-tigervnc-ubuntu-2004
-    image: ubuntu:20.04
+  - name: ansible-role-tigervnc-ubuntu-2204
+    image: ubuntu:22.04
     command: /lib/systemd/systemd
     tmpfs:
       - /run
@@ -37,8 +37,8 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
-  - name: ansible-role-tigervnc-ubuntu-2204
-    image: ubuntu:22.04
+  - name: ansible-role-tigervnc-ubuntu-2404
+    image: ubuntu:24.04
     command: /lib/systemd/systemd
     tmpfs:
       - /run
