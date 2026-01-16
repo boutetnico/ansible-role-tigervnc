@@ -46,6 +46,7 @@
   args:
     creates: "{{ tigervnc_password_file }}"
     stdin: "{{ tigervnc_password }}"
+  no_log: true
 
 - name: Ensure file permissions are correct
   ansible.builtin.file:
