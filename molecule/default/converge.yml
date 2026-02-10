@@ -4,3 +4,6 @@
 
   roles:
     - role: boutetnico.tigervnc
+      tigervnc_services:
+        - name: vncserver@1.service
+        - name: vncserver@2.service
