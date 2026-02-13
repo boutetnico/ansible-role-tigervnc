@@ -26,11 +26,17 @@ def test_vnc_user_exists(host):
     assert user.home == "/home/vnc"
 
 
+def _vnc_dir(host):
+    """Return the VNC config directory based on OS version."""
+    if host.file("/home/vnc/.config/tigervnc").exists:
+        return "/home/vnc/.config/tigervnc"
+    return "/home/vnc/.vnc"
+
+
 @pytest.mark.parametrize(
     "directory,user,group",
     [
         ("/home/vnc", "vnc", "vnc"),
-        ("/home/vnc/.vnc", "vnc", "vnc"),
     ],
 )
 def test_vnc_directories_exist(host, directory, user, group):
@@ -41,19 +47,21 @@ def test_vnc_directories_exist(host, directory, user, group):
     assert d.group == group
 
 
-@pytest.mark.parametrize(
-    "file,user,group,mode",
-    [
-        ("/home/vnc/.vnc/passwd", "vnc", "vnc", 0o600),
-    ],
-)
-def test_tigervnc_password_file_exist(host, file, user, group, mode):
-    f = host.file(file)
+def test_vnc_config_directory_exists(host):
+    d = host.file(_vnc_dir(host))
+    assert d.exists
+    assert d.is_directory
+    assert d.user == "vnc"
+    assert d.group == "vnc"
+
+
+def test_tigervnc_password_file_exist(host):
+    f = host.file(f"{_vnc_dir(host)}/passwd")
     assert f.exists
     assert f.is_file
-    assert f.user == user
-    assert f.group == group
-    assert f.mode == mode
+    assert f.user == "vnc"
+    assert f.group == "vnc"
+    assert f.mode == 0o600
 
 
 @pytest.mark.parametrize(
