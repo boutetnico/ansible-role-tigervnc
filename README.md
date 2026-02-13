@@ -29,8 +29,9 @@ Role Variables
 | tigervnc_group         | yes      | `vnc`                   | string    | Group running the VNC server.                  |
 | tigervnc_extra_groups  | yes      | `[]`                    | list      | List of extra groups of vnc server user.       |
 | tigervnc_home_dir      | yes      | `/home/vnc`             | string    | Home directory of vnc server user.             |
+| tigervnc_vnc_dir       | yes      | `/home/vnc/.vnc`        | string    | VNC config directory.                          |
 | tigervnc_password      | yes      | `abcd1234`              | string    | Password required to connect to the VNC server.|
-| tigervnc_password_file | yes      | `/home/vnc/.vnc/passwd` | string    | Path to the VNC server password file.          |
+| tigervnc_password_file | yes      | `<vnc_dir>/passwd`      | string    | Path to the VNC server password file.          |
 | tigervnc_options       | yes      | `-geometry 1440x900`    | string    | VNC server options.                            |
 | tigervnc_services      | yes      |                         | string    | See `defaults/main.yml`.                       |
 

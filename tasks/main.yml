@@ -33,12 +33,12 @@
     state: present
     update_cache: true
 
-- name: Ensure .vnc directory exists in vnc user home directory
+- name: Ensure VNC config directory exists
   ansible.builtin.file:
     group: "{{ tigervnc_group }}"
     mode: "0750"
     owner: "{{ tigervnc_user }}"
-    path: "{{ tigervnc_home_dir }}/.vnc"
+    path: "{{ tigervnc_vnc_dir }}"
     state: directory
 
 - name: Install vnc password file

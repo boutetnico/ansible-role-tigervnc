@@ -7,9 +7,10 @@ tigervnc_group: vnc
 tigervnc_extra_groups: []
 
 tigervnc_home_dir: /home/{{ tigervnc_user }}
+tigervnc_vnc_dir: "{{ tigervnc_home_dir }}/.vnc"
 
 tigervnc_password: abcd1234
-tigervnc_password_file: /home/{{ tigervnc_user }}/.vnc/passwd
+tigervnc_password_file: "{{ tigervnc_vnc_dir }}/passwd"
 
 tigervnc_options: "-geometry 1440x900"
 

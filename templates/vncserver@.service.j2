@@ -7,7 +7,7 @@ Type=simple
 User={{ tigervnc_user }}
 Group={{ tigervnc_group }}
 
-PIDFile=/home/%u/.vnc/%H%i.pid
+PIDFile={{ tigervnc_vnc_dir }}/%H%i.pid
 ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill :%i > /dev/null 2>&1 || :'
 ExecStart=/usr/bin/vncserver :%i {{ tigervnc_options }} -fg
 ExecStop=/usr/bin/vncserver -kill :%i

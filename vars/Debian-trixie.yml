@@ -1,0 +1,7 @@
+---
+tigervnc_packages:
+  - tigervnc-common
+  - tigervnc-standalone-server
+  - tigervnc-tools
+
+tigervnc_vnc_dir: "{{ tigervnc_home_dir }}/.config/tigervnc"
