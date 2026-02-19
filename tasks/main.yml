@@ -18,10 +18,10 @@
 - name: Ensure vnc user exists
   ansible.builtin.user:
     append: "{{ true if tigervnc_extra_groups | length > 0 else false }}"
-    group: "{{ tigervnc_user }}"
+    group: "{{ tigervnc_group }}"
     groups: "{{ tigervnc_extra_groups }}"
     home: "{{ tigervnc_home_dir }}"
-    name: "{{ tigervnc_group }}"
+    name: "{{ tigervnc_user }}"
     shell: /bin/bash
     state: present
   when: tigervnc_group != 'root'
